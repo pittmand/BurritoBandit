@@ -6,6 +6,7 @@ public class MoveEnemy : MonoBehaviour {
 
 
     public Transform player;
+    private NavMeshAgent navComponent;
     private float moveSpeed = 3;
 
 	void Start () {
