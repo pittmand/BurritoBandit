@@ -28,14 +28,15 @@ public class Projectile : MonoBehaviour {
             transform.position += direction * (Time.deltaTime * speed);
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider collider)
     {
-        if(collision.gameObject.tag.Equals("Enemy"))//test if projectile hit an enemy
+        GameObject victem = collider.gameObject;
+        if (victem.tag.Equals("Enemy"))//test if projectile hit an enemy
         {
             //damage enemy
         }
 
-        //projectile is destroyed irregardless on collide
-        Destroy(gameObject);
+        if (!victem.tag.Equals("Player"))//test if projectile did not hit the player
+            Destroy(gameObject);
     }
 }
