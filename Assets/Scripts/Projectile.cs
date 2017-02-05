@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    float timestamp_Spawn;
-    public float lifespan;
-    public Vector3 direction;
-    public float speed;
+    private float timestamp_Spawn;
+    internal float lifespan = 5;
+    internal float speed = 10;
+    internal Vector3 direction;
 
-	void Start ()
+    void Start ()
     {
         //set timestamp to record age
         timestamp_Spawn = Time.time;
