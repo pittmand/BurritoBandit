@@ -7,17 +7,24 @@ public class PlayerController : MonoBehaviour {
     public float rotationSpeed = 450;
     public float walkSpeed = 5;
     public float runSpeed = 8;
+    public float attackDelay = 0.5f;
+    public GameObject prefab_Projectile;
+    public Transform spawnPoint_Projectile;
 
     private CharacterController _characterController;
     private Quaternion _targetRotation;
     private Camera _camera;
-    void Start () {
+    private float _timestamp_Attack;
+
+    void Start() {
         _characterController = GetComponent<CharacterController>();
         _camera = Camera.main;
+        _timestamp_Attack = Time.time;
     }
-	
+
 	void Update () {
         ControlMouse();
+        HandleAttack();
     }
 
     void ControlMouse()
@@ -41,6 +48,7 @@ public class PlayerController : MonoBehaviour {
         _characterController.Move(motion * Time.deltaTime);
     }
 
+    // INTEGRATED INTO CONTROL_MOUSE() : this should probably be removed
     void ControlWASD()
     {
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
@@ -54,5 +62,26 @@ public class PlayerController : MonoBehaviour {
         motion *= Input.GetButton("Run") ? runSpeed : walkSpeed;
         motion += Vector3.up * -8;
         _characterController.Move(motion * Time.deltaTime);
+    }
+
+    void HandleAttack()
+    {
+        if (Input.GetButton("Fire"))// Is player trying to attack?
+        {
+            if (Time.time > _timestamp_Attack + attackDelay)// Can the player ccan shoot another attack?
+            {
+                //update fire delay
+                _timestamp_Attack = Time.time;
+
+                //calc orientation
+                Vector3 _heading = transform.forward;
+                Vector3 _position = spawnPoint_Projectile.position;
+
+                //instantiate
+                GameObject _projectile_Obj = Instantiate(prefab_Projectile, _position, Quaternion.identity);
+                Projectile _projectile_Scr = _projectile_Obj.GetComponent<Projectile>();
+                _projectile_Scr.direction = _heading;
+            }
+        }
     }
 }
