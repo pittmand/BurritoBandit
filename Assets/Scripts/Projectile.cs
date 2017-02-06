@@ -31,6 +31,7 @@ public class Projectile : MonoBehaviour {
     void OnTriggerEnter(Collider collider)
     {
         GameObject victem = collider.gameObject;
+        Debug.Log("OnTriggerEnter fired");
         if (victem.tag.Equals("Enemy"))//test if projectile hit an enemy
         {
             //damage enemy
