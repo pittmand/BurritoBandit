@@ -6,6 +6,9 @@ public class Spawn : MonoBehaviour
     public float delay_activation = 1;
     public float delay_multipuleSpawn = 3;
     public GameObject[] prefab_enemies;
+    public int scoreValue;
+
+    private GameController gameController;
     internal System.Collections.Generic.List<GameObject> enemies;
     private Vector3 spawnPoint;
     private bool invoked = false;
@@ -13,6 +16,14 @@ public class Spawn : MonoBehaviour
 
     void Start()
     {
+        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+        if (gameControllerObject != null)
+        {
+            Debug.Log("'GameController' instance found");
+            gameController = gameControllerObject.GetComponent<GameController>();
+        }
+        else
+            Debug.Log("Unable to find 'GameController' asset");
         enemies = new System.Collections.Generic.List<GameObject>();
     }
 
@@ -45,6 +56,8 @@ public class Spawn : MonoBehaviour
 
     internal void ChildDestoryed(GameObject child)
     {
+        Debug.Log("Calling AddScore");
+        gameController.addScore(scoreValue);
         enemies.Remove(child);
     }
 }

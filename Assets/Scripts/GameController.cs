@@ -26,6 +26,9 @@ public class GameController : MonoBehaviour {
     public GameObject settingsMenu;
     public GameObject inGameMenu;
     public GameObject HUD;
+    public GUIText scoreText;
+    //public int score;
+
     Image lifeBar;
     Text score_displayed;
 
@@ -228,7 +231,7 @@ public class GameController : MonoBehaviour {
         score_displayed.text = "SCORE:" + current_score;
     }
 
-    internal void addScore(int value)
+    public void addScore(int value)
     {
         current_score += value;
         score_displayed.text = "SCORE:" + current_score;
