@@ -21,7 +21,6 @@ public class EnemyHealthManager : MonoBehaviour {
 	void Update () {
         if (CurrentHealth <= 0)
         {
-            Debug.Log("Health Manager Update Called");
             Destroy(gameObject);
             if (gameController != null)
                 gameController.addScore(scoreValue);
@@ -30,7 +29,6 @@ public class EnemyHealthManager : MonoBehaviour {
 
     public void HurtEnemy(int damageTaken)
     {
-        Debug.Log("hurt enemy called");
         CurrentHealth -= damageTaken;
     }
 }
