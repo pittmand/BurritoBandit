@@ -6,6 +6,7 @@ public class EnemyHealthManager : MonoBehaviour {
     public int MaxHealth = 50;
     public int CurrentHealth;
     public GameObject enemy;
+    public int scoreValue = 1;
 
     void Start ()
     {
@@ -18,6 +19,7 @@ public class EnemyHealthManager : MonoBehaviour {
         {
             Debug.Log("Health Manager Update Called");
             Destroy(gameObject);
+            GameController.s_Instance.addScore(scoreValue);
         }
     }
 
