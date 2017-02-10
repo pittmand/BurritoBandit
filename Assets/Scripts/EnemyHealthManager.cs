@@ -7,10 +7,14 @@ public class EnemyHealthManager : MonoBehaviour {
     public int CurrentHealth;
     public GameObject enemy;
     public int scoreValue = 1;
+    public GameController gameController;
 
     void Start ()
     {
         CurrentHealth = MaxHealth;
+        gameController = GameController.s_Instance;
+        if(gameController == null)
+            Debug.Log("GameController was not instantiated");
     }
 	
 	// Update is called once per frame
@@ -19,7 +23,8 @@ public class EnemyHealthManager : MonoBehaviour {
         {
             Debug.Log("Health Manager Update Called");
             Destroy(gameObject);
-            GameController.s_Instance.addScore(scoreValue);
+            if (gameController != null)
+                gameController.addScore(scoreValue);
         }
     }
 
