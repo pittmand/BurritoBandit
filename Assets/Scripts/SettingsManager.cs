@@ -28,17 +28,25 @@ public class SettingsManager : MonoBehaviour
     // Video
     public Resolution[] resolutions;
 
-    // Audio
-    public AudioSource audioSource;
-
     /// APP INFO ///
     // Settings
     public GameSettings gameSettings;
 
+    // Audio
+    public UnityEngine.Audio.AudioMixer audioMixerMaster;
+
+    internal enum AudioTypes
+    {
+        MASTER,
+        MUSIC,
+        FX
+    };
+
+    string[] AudioVarNames = { "Vol_Master", "Vol_Music", "Vol_FX" };
 
 
     /// UNITY EVENTS ///
-    
+
     void Awake()
     {
         // Init settings
@@ -64,15 +72,27 @@ public class SettingsManager : MonoBehaviour
         dropdown_ShadowResolution.onValueChanged.AddListener(delegate { OnChange_ShadowResolution(); });
         dropdown_Antialiasing.onValueChanged.AddListener(delegate { OnChange_Antialiasing(); });
         dropdown_vSync.onValueChanged.AddListener(delegate { OnChange_vSync(); });
-        slider_Volume_Master.onValueChanged.AddListener(delegate { OnChange_Volume(); });
-        slider_Volume_Music.onValueChanged.AddListener(delegate { OnChange_Volume(); });
-        slider_Volume_FX.onValueChanged.AddListener(delegate { OnChange_Volume(); });
+        slider_Volume_Master.onValueChanged.AddListener(delegate { OnChange_Volume_Master(); });
+        slider_Volume_Music.onValueChanged.AddListener(delegate { OnChange_Volume_Music(); });
+        slider_Volume_FX.onValueChanged.AddListener(delegate { OnChange_Volume_FX(); });
+    }
+
+    /// AUDIO ///
+    internal void changeVolume(AudioTypes type, float range)
+    {
+        range = Mathf.Clamp(range, 0, 1);
+        float val;
+        if (type == AudioTypes.MASTER)
+            val = range * 50 - 40;
+        else
+            val = range * 50 - 50;
+        audioMixerMaster.SetFloat(AudioVarNames[(int)type], val);
     }
 
 
 
     /// RESOLUTION ///
-    
+
     internal void findResolutions()
     {
         // Find resolutions
@@ -116,8 +136,6 @@ public class SettingsManager : MonoBehaviour
     }
 
 
-
-
     /// FILE ACCESS ///
     
     internal string settings_FilePath()
@@ -153,13 +171,6 @@ public class SettingsManager : MonoBehaviour
             // Update Game
             Resolution res = resolutions[dropdown_Resolution.value];
             Screen.SetResolution(res.width, res.height, Screen.fullScreen);
-            QualitySettings.shadowResolution = (ShadowResolution)gameSettings.shadowResolution;
-            QualitySettings.masterTextureLimit = gameSettings.textureQuality;
-            QualitySettings.antiAliasing = gameSettings.antialiasing;
-            QualitySettings.vSyncCount = gameSettings.vSync;
-            //audioSource.volume = gameSettings.volumeMaster;
-            // = gameSettings.volumeMusic;
-            // = gameSettings.volumeFX;
         }
         else
         {
@@ -172,6 +183,15 @@ public class SettingsManager : MonoBehaviour
             // Create default settings file
             SaveSettings();
         }
+
+        // Update Game
+        QualitySettings.shadowResolution = (ShadowResolution)gameSettings.shadowResolution;
+        QualitySettings.masterTextureLimit = gameSettings.textureQuality;
+        QualitySettings.antiAliasing = gameSettings.antialiasing;
+        QualitySettings.vSyncCount = gameSettings.vSync;
+        changeVolume(AudioTypes.MASTER, gameSettings.volumeMaster);
+        changeVolume(AudioTypes.MUSIC, gameSettings.volumeMusic);
+        changeVolume(AudioTypes.FX, gameSettings.volumeFX);
     }
 
     internal void SaveSettings()
@@ -237,12 +257,26 @@ public class SettingsManager : MonoBehaviour
         QualitySettings.vSyncCount = i;
     }
 
-    public void OnChange_Volume()
+    public void OnChange_Volume_Master()
     {
-        gameSettings.volumeMaster = slider_Volume_Master.value;
-        gameSettings.volumeMusic = slider_Volume_Music.value;
-        gameSettings.volumeFX = slider_Volume_FX.value;
+        float f = slider_Volume_Master.value;
+        gameSettings.volumeMaster = f;
+        changeVolume(AudioTypes.MASTER, f);
+    }
 
-        //audioSource.volume = gameSettings.volumeMaster;
+
+    public void OnChange_Volume_Music()
+    {
+        float f = slider_Volume_Music.value;
+        gameSettings.volumeMusic = f;
+        changeVolume(AudioTypes.MUSIC, f);
+    }
+
+
+    public void OnChange_Volume_FX()
+    {
+        float f = slider_Volume_FX.value;
+        gameSettings.volumeFX = f;
+        changeVolume(AudioTypes.FX, f);
     }
 }
