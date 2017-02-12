@@ -15,11 +15,13 @@ public class PlayerController : MonoBehaviour {
     private Quaternion _targetRotation;
     private Camera _camera;
     private float _timestamp_Attack;
+    private AudioSource _shotSound;
 
     void Start() {
         _characterController = GetComponent<CharacterController>();
         _camera = Camera.main;
         _timestamp_Attack = Time.time;
+        _shotSound = GetComponent<AudioSource>();
     }
 
 	void Update () {
@@ -81,6 +83,9 @@ public class PlayerController : MonoBehaviour {
                 GameObject _projectile_Obj = Instantiate(prefab_Projectile, _position, Quaternion.identity);
                 Projectile _projectile_Scr = _projectile_Obj.GetComponent<Projectile>();
                 _projectile_Scr.direction = _heading;
+
+                //play shotting clip
+                _shotSound.Play();
             }
         }
     }
