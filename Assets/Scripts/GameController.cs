@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
+    public static GameController s_Instance;
+
     //states
     enum State
     {
@@ -46,6 +48,9 @@ public class GameController : MonoBehaviour {
     void Start () {
         //set game state
         currentState = State.Load;
+
+        //set refferance
+        s_Instance = this;
 
         //freeze ingame time
         Time.timeScale = 0.0f;
