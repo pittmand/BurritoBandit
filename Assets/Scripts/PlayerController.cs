@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject prefab_Projectile;
     public Transform spawnPoint_Projectile;
 
+    private GameController _gameController;
     private CharacterController _characterController;
     private Quaternion _targetRotation;
     private Camera _camera;
@@ -22,6 +23,9 @@ public class PlayerController : MonoBehaviour {
         _camera = Camera.main;
         _timestamp_Attack = Time.time;
         _shotSound = GetComponent<AudioSource>();
+        _gameController = GameController.s_Instance;
+        if (_gameController == null)
+            Debug.Log("GameController was not instantiated");
     }
 
 	void Update () {
@@ -83,6 +87,10 @@ public class PlayerController : MonoBehaviour {
                 GameObject _projectile_Obj = Instantiate(prefab_Projectile, _position, Quaternion.identity);
                 Projectile _projectile_Scr = _projectile_Obj.GetComponent<Projectile>();
                 _projectile_Scr.direction = _heading;
+
+                //power up damage
+                if (_gameController != null && _gameController.Power_Up)
+                    _projectile_Scr.power = 25;
 
                 //play shotting clip
                 _shotSound.Play();
