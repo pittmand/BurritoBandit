@@ -84,16 +84,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MoveEnemy.cs" />
+    <Compile Include="Assets\Explosion System\Demo\Script (for Demo)\ExplosionControl.cs" />
+    <Compile Include="Assets\Explosion System\Scripts\GraphicExplosion.cs" />
+    <Compile Include="Assets\Explosion System\Scripts\PhysicalExplosion.cs" />
+    <Compile Include="Assets\Explosion System\Scripts\light_control.cs" />
     <Compile Include="Assets\Scripts\EnemyHealthManager.cs" />
     <Compile Include="Assets\Scripts\GameCamera.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\GameSettings.cs" />
+    <Compile Include="Assets\Scripts\MoveEnemy.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
+    <Compile Include="Assets\Scripts\SaveData.cs" />
+    <Compile Include="Assets\Scripts\SettingsManager.cs" />
+    <Compile Include="Assets\Scripts\Spawn.cs" />
     <Compile Include="Assets\Scripts\Spawnling.cs" />
-    <Compile Include="Assets\Spawn.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Explosion System\Shader\Exposion.shader" />
     <None Include="Assets\Standard Assets\Cameras\CameraGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
