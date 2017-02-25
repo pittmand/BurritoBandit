@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour {
     internal float lifespan = 5;
     internal float speed = 10;
     internal Vector3 direction;
+    internal int power = 10;
 
     void Start ()
     {
@@ -34,7 +35,7 @@ public class Projectile : MonoBehaviour {
         Debug.Log("OnTriggerEnter fired");
         if (victem.tag.Equals("Enemy"))//test if projectile hit an enemy
         {
-            collider.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(10);
+            collider.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(power);
             //damage enemy
         }
 

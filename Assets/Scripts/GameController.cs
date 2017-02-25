@@ -103,7 +103,7 @@ public class GameController : MonoBehaviour {
             //check if a power up expired
             if (power_up && duration_PowerUP < Time.time - timestamp_PowerUP)
             {
-
+                power_up = false;
             }
         }
 
