@@ -86,7 +86,6 @@ public class Spawn : MonoBehaviour
             max.y = Mathf.Max(Mathf.Min(pos_player.y + Local_bounds_radius_max, max_b.y), min_b.y);
             max.z = Mathf.Max(Mathf.Min(pos_player.z + Local_bounds_radius_max, max_b.z), min_b.z);
 
-
             //randomize position
             spawnPoint.y = pos_player.y;
             int attempt = 0;
@@ -103,7 +102,7 @@ public class Spawn : MonoBehaviour
                 distance = Vector3.Distance(spawnPoint, pos_player);
             }
             while (distance < Local_bounds_radius_min || Local_bounds_radius_max > 100);
-            spawnPoint.y = pos.y + max.y;
+            spawnPoint.y = max.y;
 
             //test terrain
             RaycastHit hit;
