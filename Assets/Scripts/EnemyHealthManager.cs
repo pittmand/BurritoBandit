@@ -8,12 +8,13 @@ public class EnemyHealthManager : MonoBehaviour {
     public GameObject enemy;
     public int scoreValue = 1;
     public GameController gameController;
+    public GameObject prefab_Explosion;
 
     void Start ()
     {
         CurrentHealth = MaxHealth;
         gameController = GameController.s_Instance;
-        if(gameController == null)
+        if (gameController == null)
             Debug.Log("GameController was not instantiated");
     }
 	
@@ -24,6 +25,7 @@ public class EnemyHealthManager : MonoBehaviour {
             Destroy(gameObject);
             if (gameController != null)
                 gameController.addScore(scoreValue);
+            GameObject _explosion_obj = Instantiate(prefab_Explosion, transform.position, Quaternion.identity);
         }
     }
 
