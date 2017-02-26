@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour {
     public float attackDelay = 0.5f;
     public GameObject prefab_Projectile;
     public Transform spawnPoint_Projectile;
+    public int hitCount = 3; //number of hits
+    public float hitTime = 2; //time in seconds between each hit
+    public int duration_invinc = 2;
 
     private GameController _gameController;
     private CharacterController _characterController;
@@ -96,5 +99,25 @@ public class PlayerController : MonoBehaviour {
                 _shotSound.Play();
             }
         }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("OnCollisionEnter triggered");
+        GameObject enemy = collision.gameObject;
+        if (enemy.tag.Equals("Enemy"))
+        {
+            float timestamp_hurt = Time.time;
+            if (Time.time - timestamp_hurt >= duration_invinc)
+            {
+                Debug.Log("player hurt");
+                hitCount--;
+                _gameController.removeLife();
+
+                timestamp_hurt = Time.time;
+            }
+        }
+        if (hitCount <= 0)
+            _gameController.Defeated();
     }
 }

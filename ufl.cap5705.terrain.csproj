@@ -89,6 +89,7 @@
     <Compile Include="Assets\Explosion System\Scripts\PhysicalExplosion.cs" />
     <Compile Include="Assets\Explosion System\Scripts\light_control.cs" />
     <Compile Include="Assets\Scripts\EnemyHealthManager.cs" />
+    <Compile Include="Assets\Scripts\FailureScene.cs" />
     <Compile Include="Assets\Scripts\GameCamera.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\GameSettings.cs" />

@@ -21,25 +21,179 @@ Platform assembly: C:\Users\David\Documents\ufl.cap5705.terrain\BurritoBandit_Da
 Loading C:\Users\David\Documents\ufl.cap5705.terrain\BurritoBandit_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
 Platform assembly: C:\Users\David\Documents\ufl.cap5705.terrain\BurritoBandit_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
 Loading C:\Users\David\Documents\ufl.cap5705.terrain\BurritoBandit_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
-- Completed reload, in  0.259 seconds
+- Completed reload, in  0.169 seconds
 Platform assembly: C:\Users\David\Documents\ufl.cap5705.terrain\BurritoBandit_Data\Managed\System.Core.dll (this message is harmless)
 Platform assembly: C:\Users\David\Documents\ufl.cap5705.terrain\BurritoBandit_Data\Managed\System.dll (this message is harmless)
-desktop: 1920x1080 60Hz; virtual: 5280x1080 at -1920,0
+desktop: 1680x1050 60Hz; virtual: 5280x1080 at -1920,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 3.148933 ms
+UnloadTime: 1.512622 ms
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 332c -> priority: 1 
-UnloadTime: 0.245422 ms
+  Thread -> id: 82f8 -> priority: 1 
+UnloadTime: 0.246888 ms
 
-Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 647.
-Total: 0.439511 ms (FindLiveObjects: 0.036177 ms CreateObjectMapping: 0.033244 ms MarkObjects: 0.350044 ms  DeleteObjects: 0.013200 ms)
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 938.
+Total: 0.653644 ms (FindLiveObjects: 0.052800 ms CreateObjectMapping: 0.031288 ms MarkObjects: 0.551955 ms  DeleteObjects: 0.010266 ms)
+
+The file 'C:/Users/David/Documents/ufl.cap5705.terrain/BurritoBandit_Data/level2' is corrupted! Remove it and launch unity again!
+[Position out of bounds!]
+ 
+(Filename:  Line: 214)
+
+The file 'C:/Users/David/Documents/ufl.cap5705.terrain/BurritoBandit_Data/level2' is corrupted! Remove it and launch unity again!
+[Position out of bounds!]
+ 
+(Filename:  Line: 220)
 
 Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 0.332444 ms
+UnloadTime: 0.349555 ms
 
-Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 759.
-Total: 0.490844 ms (FindLiveObjects: 0.052311 ms CreateObjectMapping: 0.031777 ms MarkObjects: 0.385733 ms  DeleteObjects: 0.014177 ms)
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1115.
+Total: 1.287244 ms (FindLiveObjects: 0.075777 ms CreateObjectMapping: 0.041555 ms MarkObjects: 0.792488 ms  DeleteObjects: 0.370577 ms)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnTriggerEnter fired
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Save
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
 
