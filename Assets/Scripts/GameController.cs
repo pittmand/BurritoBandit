@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
     public GameObject settingsMenu;
     public GameObject inGameMenu;
     public GameObject HUD;
-    Image lifeBar;
+    RectTransform lifeBar;
     Text score_displayed;
 
     //stats
@@ -70,7 +70,7 @@ public class GameController : MonoBehaviour {
         Object.DontDestroyOnLoad(mainMenu.transform.parent.gameObject);//UI
 
         /// FIND COMPONENTS ///
-        lifeBar = HUD.GetComponentInChildren<Image>();
+        lifeBar = HUD.GetComponentInChildren<RectTransform>();
         score_displayed = HUD.GetComponentInChildren<Text>();
 
         /// LOAD MAIN MENU ///
@@ -292,7 +292,7 @@ public class GameController : MonoBehaviour {
     void setLife(int value)
     {
         current_life = value;
-        lifeBar.fillAmount = (float)current_life / (float)max_life;
+        lifeBar.sizeDelta = new Vector2(100.0f * (float)current_life, lifeBar.sizeDelta.y);
     }
 
     internal bool addLife()
@@ -302,7 +302,7 @@ public class GameController : MonoBehaviour {
         else
         {
             ++current_life;
-            lifeBar.fillAmount = (float)current_life / (float)max_life;
+            lifeBar.sizeDelta = new Vector2(100.0f * (float)current_life, lifeBar.sizeDelta.y);
             return true;
         }
     }
@@ -314,7 +314,7 @@ public class GameController : MonoBehaviour {
         else
         {
             --current_life;
-            lifeBar.fillAmount = (float)current_life / (float)max_life;
+            lifeBar.sizeDelta = new Vector2(100.0f * (float)current_life, lifeBar.sizeDelta.y);
             return true;
         }
     }
