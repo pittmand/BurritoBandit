@@ -8,14 +8,21 @@ public class FailureScene : MonoBehaviour {
     public float duration_ExitDelay = 5;
     private float timestamp_loaded;
     private bool flag = true;
+    private CanvasGroup group; 
     
     void Start () {
         timestamp_loaded = Time.unscaledTime;
+        group = gameObject.GetComponent<CanvasGroup>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (flag && Time.unscaledTime >= timestamp_loaded + duration_ExitDelay)
+
+        float prog = Time.unscaledTime - timestamp_loaded;
+        
+        group.alpha = Mathf.Min(prog / duration_FadeIn, 1.0f);
+
+        if (flag && prog >= duration_ExitDelay)
         {
             if(Input.GetButton("Submit") || Input.GetButton("Cancel"))
             {
