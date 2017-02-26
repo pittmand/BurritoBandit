@@ -19,12 +19,13 @@ public class PlayerController : MonoBehaviour {
     private Quaternion _targetRotation;
     private Camera _camera;
     private float _timestamp_Attack;
+    private float _timestamp_hurt;
     private AudioSource _shotSound;
 
     void Start() {
         _characterController = GetComponent<CharacterController>();
         _camera = Camera.main;
-        _timestamp_Attack = Time.time;
+        _timestamp_hurt = _timestamp_Attack = Time.time;
         _shotSound = GetComponent<AudioSource>();
         _gameController = GameController.s_Instance;
         if (_gameController == null)
@@ -103,18 +104,16 @@ public class PlayerController : MonoBehaviour {
 
     public void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("OnCollisionEnter triggered");
         GameObject enemy = collision.gameObject;
         if (enemy.tag.Equals("Enemy"))
         {
-            float timestamp_hurt = Time.time;
-            if (Time.time - timestamp_hurt >= duration_invinc)
+            if (Time.time - _timestamp_hurt >= duration_invinc)
             {
                 Debug.Log("player hurt");
                 hitCount--;
                 _gameController.removeLife();
 
-                timestamp_hurt = Time.time;
+                _timestamp_hurt = Time.time;
             }
         }
         if (hitCount <= 0)
