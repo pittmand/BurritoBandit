@@ -89,35 +89,47 @@ public class GameController : MonoBehaviour {
 
     void Update()
     {
-        //check if pauseing
-        if (currentState == State.MainGame && Input.GetButtonDown("Pause"))
+        // if main game
+        if (currentState >= State.MainGame)
         {
-            if (paused)
-                ContinueGame();
-            else
-                PauseGame();
-        }
-
-        if (!paused)
-        {
-            //check if a power up expired
-            if (power_up && duration_PowerUP < Time.time - timestamp_PowerUP)
+            //check if pauseing
+            if (currentState == State.MainGame && Input.GetButtonDown("Pause"))
             {
-                power_up = false;
+                if (paused)
+                    ContinueGame();
+                else
+                    PauseGame();
             }
-        }
 
-        //check if beaten highscore
-        if(current_score > saveData.highScore)
-        {
-            saveData.highScore = current_score;
-        }
+            if (!paused)
+            {
+                //check if defeated
+                if (current_life <= 0)
+                {
+                    Defeated();
+                }
+                else
+                {
+                    //check if a power up expired
+                    if (power_up && duration_PowerUP < Time.time - timestamp_PowerUP)
+                    {
+                        power_up = false;
+                    }
+                }
+            }
 
-        //check if time to auto save
-        if (toggle_AutoSave && currentState >= State.MainGame && duration_AutoSave < Time.unscaledTime - timestamp_AutoSave)
-        {
-            AutoSave();
-            timestamp_AutoSave = Time.unscaledTime;
+            //check if beaten highscore
+            if (current_score > saveData.highScore)
+            {
+                saveData.highScore = current_score;
+            }
+
+            //check if time to auto save
+            if (toggle_AutoSave && currentState == State.MainGame && duration_AutoSave < Time.unscaledTime - timestamp_AutoSave)
+            {
+                AutoSave();
+                timestamp_AutoSave = Time.unscaledTime;
+            }
         }
     }
 
@@ -160,6 +172,7 @@ public class GameController : MonoBehaviour {
         currentState = State.MainGame;
     }
 
+    //called from UI to quit the game and app
     public void QuitGame()
     {
         //save game
@@ -171,6 +184,7 @@ public class GameController : MonoBehaviour {
 #endif
     }
 
+    //called from UI to quit the game and return to menu
     public void QuitToMain()
     {
         //freeze ingame time (if active)
@@ -184,6 +198,41 @@ public class GameController : MonoBehaviour {
 
         //save game
         SaveData();
+
+        //exit level
+        SceneManager.LoadScene("MainMenu");
+
+        //open main menu
+        mainMenu.SetActive(true);
+
+        //set game state
+        currentState = State.MainMenu;
+    }
+
+    //called when player is defeated
+    public void Defeated()
+    {
+        //freeze ingame time (if active)
+        Time.timeScale = 0.0f;
+
+        //close in game menu (if open)
+        inGameMenu.SetActive(false);
+
+        //save game
+        SaveData();
+
+        //load fail scene as overlay
+        SceneManager.LoadScene("YouLose", LoadSceneMode.Additive);
+
+        //set game state
+        currentState = State.LoseScence;
+    }
+
+    //called when player exits the win/lose cutscene
+    public void ReturnToMain()
+    {
+        //close hud (if active)
+        HUD.SetActive(false);
 
         //exit level
         SceneManager.LoadScene("MainMenu");
