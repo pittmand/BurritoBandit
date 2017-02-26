@@ -106,7 +106,8 @@ public class GameController : MonoBehaviour {
                 //check if defeated
                 if (current_life <= 0)
                 {
-                    Defeated();
+                    if (currentState == State.MainGame)//prevent redundant call
+                        Defeated();
                 }
                 else
                 {

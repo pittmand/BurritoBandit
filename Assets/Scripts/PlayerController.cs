@@ -10,18 +10,22 @@ public class PlayerController : MonoBehaviour {
     public float attackDelay = 0.5f;
     public GameObject prefab_Projectile;
     public Transform spawnPoint_Projectile;
+    public int hitCount = 3; //number of hits
+    public float hitTime = 2; //time in seconds between each hit
+    public int duration_invinc = 2;
 
     private GameController _gameController;
     private CharacterController _characterController;
     private Quaternion _targetRotation;
     private Camera _camera;
     private float _timestamp_Attack;
+    private float _timestamp_hurt;
     private AudioSource _shotSound;
 
     void Start() {
         _characterController = GetComponent<CharacterController>();
         _camera = Camera.main;
-        _timestamp_Attack = Time.time;
+        _timestamp_hurt = _timestamp_Attack = Time.time;
         _shotSound = GetComponent<AudioSource>();
         _gameController = GameController.s_Instance;
         if (_gameController == null)
@@ -96,5 +100,23 @@ public class PlayerController : MonoBehaviour {
                 _shotSound.Play();
             }
         }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        GameObject enemy = collision.gameObject;
+        if (enemy.tag.Equals("Enemy"))
+        {
+            if (Time.time - _timestamp_hurt >= duration_invinc)
+            {
+                Debug.Log("player hurt");
+                hitCount--;
+                _gameController.removeLife();
+
+                _timestamp_hurt = Time.time;
+            }
+        }
+        if (hitCount <= 0)
+            _gameController.Defeated();
     }
 }
