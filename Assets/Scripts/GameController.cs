@@ -70,7 +70,7 @@ public class GameController : MonoBehaviour {
         Object.DontDestroyOnLoad(mainMenu.transform.parent.gameObject);//UI
 
         /// FIND COMPONENTS ///
-        lifeBar = HUD.GetComponentInChildren<RectTransform>();
+        lifeBar = HUD.transform.Find("Life Bar").GetComponent<RectTransform>();
         score_displayed = HUD.GetComponentInChildren<Text>();
 
         /// LOAD MAIN MENU ///
