@@ -7,10 +7,11 @@ public class MoveEnemy : MonoBehaviour {
 
     public Transform player;
     private UnityEngine.AI.NavMeshAgent navComponent;
-    private float moveSpeed = 3;
+    private float moveSpeed;
 
 	void Start () {
         player = GameObject.FindWithTag("Player").transform;
+        moveSpeed = Random.Range(5f, 8f);
     }
 
     void Update () {
