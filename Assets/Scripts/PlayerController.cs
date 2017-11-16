@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     public int hitCount = 3; //number of hits
     public float hitTime = 2; //time in seconds between each hit
     public int duration_invinc = 2;
+    public LayerMask cursorTargets;
+    public Transform Aimable;
 
     private GameController _gameController;
     private CharacterController _characterController;
@@ -39,11 +41,11 @@ public class PlayerController : MonoBehaviour {
 
     void ControlMouse()
     {
-        Vector3 _mousePosition = Input.mousePosition;
-
-        _mousePosition = _camera.ScreenToWorldPoint(new Vector3(_mousePosition.x, _mousePosition.y, _camera.transform.position.y - transform.position.y));
-        _targetRotation = Quaternion.LookRotation(_mousePosition - new Vector3(transform.position.x,0,transform.position.z));
-        transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y, _targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit, 50, cursorTargets.value);
+        _targetRotation = Quaternion.LookRotation(new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(Aimable.transform.position.x,0, Aimable.transform.position.z));
+        Aimable.transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(Aimable.transform.eulerAngles.y, _targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
 
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         //if (input != Vector3.zero)
@@ -84,7 +86,7 @@ public class PlayerController : MonoBehaviour {
                 _timestamp_Attack = Time.time;
 
                 //calc orientation
-                Vector3 _heading = transform.forward;
+                Vector3 _heading = Aimable.transform.forward;
                 Vector3 _position = spawnPoint_Projectile.position;
 
                 //instantiate
@@ -102,9 +104,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collider)
     {
-        GameObject enemy = collision.gameObject;
+        GameObject enemy = collider.gameObject;
         if (enemy.tag.Equals("Enemy"))
         {
             if (Time.time - _timestamp_hurt >= duration_invinc)

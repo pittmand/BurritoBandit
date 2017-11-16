@@ -9,11 +9,13 @@ public class GameCamera : MonoBehaviour {
 
 	void Start () {
         _target = GameObject.FindGameObjectWithTag("Player").transform;
-	}
+        _cameraTarget = _target.position;
+        transform.position = _cameraTarget;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        _cameraTarget = new Vector3(_target.position.x, transform.position.y, _target.position.z);
+        _cameraTarget = _target.position;
         transform.position = Vector3.Lerp(transform.position, _cameraTarget, Time.deltaTime * 8);
     }
 }
