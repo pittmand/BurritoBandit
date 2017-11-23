@@ -114,7 +114,7 @@ public class Spawn : MonoBehaviour
 
             GameObject enemy = Instantiate(prefab_enemies[UnityEngine.Random.Range(0, prefab_enemies.Length - 1)], spawnPoint, Quaternion.identity);
             enemies.Add(enemy);
-            enemy.GetComponent<Spawnling>().spawner = this;
+            enemy.AddComponent<Spawnling>().spawner = this;
             ++count;
 
             if (enemies.Count >= max_active)

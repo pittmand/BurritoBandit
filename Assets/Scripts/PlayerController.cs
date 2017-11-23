@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     public int hitCount = 3; //number of hits
     public float hitTime = 2; //time in seconds between each hit
     public int duration_invinc = 2;
+    public LayerMask cursorTargets;
+    public Transform Aimable;
 
     private GameController _gameController;
     private CharacterController _characterController;
@@ -21,6 +23,12 @@ public class PlayerController : MonoBehaviour {
     private float _timestamp_Attack;
     private float _timestamp_hurt;
     private AudioSource _shotSound;
+    private Animator spriteAnimator;
+
+    private Vector3 motion_Flat;
+    private Vector3 directional_facing;
+    private float speed;
+
 
     void Start() {
         _characterController = GetComponent<CharacterController>();
@@ -30,6 +38,7 @@ public class PlayerController : MonoBehaviour {
         _gameController = GameController.s_Instance;
         if (_gameController == null)
             Debug.Log("GameController was not instantiated");
+        spriteAnimator = GetComponent<Animator>();
     }
 
 	void Update () {
@@ -39,39 +48,41 @@ public class PlayerController : MonoBehaviour {
 
     void ControlMouse()
     {
-        Vector3 _mousePosition = Input.mousePosition;
+        //set facing
+        Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        Physics.Raycast(ray, out hit, 50, cursorTargets.value);
+        //Vector3
+        directional_facing = Vector3.Normalize(new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(Aimable.transform.position.x, 0, Aimable.transform.position.z));
+        _targetRotation = Quaternion.LookRotation(directional_facing);
+        Aimable.transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(Aimable.transform.eulerAngles.y, _targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
 
-        _mousePosition = _camera.ScreenToWorldPoint(new Vector3(_mousePosition.x, _mousePosition.y, _camera.transform.position.y - transform.position.y));
-        _targetRotation = Quaternion.LookRotation(_mousePosition - new Vector3(transform.position.x,0,transform.position.z));
-        transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y, _targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
-
+        //set motion
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        //if (input != Vector3.zero)
-        //{
-        //    _targetRotation = Quaternion.LookRotation(input);
-        //    transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y, _targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
-        //}
         Vector3 motion = input;
         motion *= Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1 ? 0.70710678118654752440084436210485f : 1.0f;
         motion *= Input.GetButton("Run") ? runSpeed : walkSpeed;
+        //Vector3
+        motion_Flat = motion;
         motion += Vector3.up * -8;
         _characterController.Move(motion * Time.deltaTime);
-    }
 
-    // INTEGRATED INTO CONTROL_MOUSE() : this should probably be removed
-    void ControlWASD()
-    {
-        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        if (input != Vector3.zero)
+        //set sprite state
+        //float
+            speed = motion_Flat.magnitude;
+        bool forwards = Vector3.Dot(directional_facing, motion_Flat) >= 0;
+        if (speed < 0.1f)
         {
-            _targetRotation = Quaternion.LookRotation(input);
-            transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y, _targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
+            spriteAnimator.SetBool("Idle", true);
+            spriteAnimator.SetFloat("Speed", 1.0f);
         }
-        Vector3 motion = input;
-        motion *= Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1 ? 0.70710678118654752440084436210485f : 1.0f;
-        motion *= Input.GetButton("Run") ? runSpeed : walkSpeed;
-        motion += Vector3.up * -8;
-        _characterController.Move(motion * Time.deltaTime);
+        else
+        {
+            spriteAnimator.SetBool("Idle", false);
+            spriteAnimator.SetFloat("Speed", forwards ? speed : -speed);
+        }
+        spriteAnimator.SetBool("Looking_Left", directional_facing.x < 0);
+        spriteAnimator.SetBool("Looking_Forward", directional_facing.z > 0);
     }
 
     void HandleAttack()
@@ -84,7 +95,7 @@ public class PlayerController : MonoBehaviour {
                 _timestamp_Attack = Time.time;
 
                 //calc orientation
-                Vector3 _heading = transform.forward;
+                Vector3 _heading = Aimable.transform.forward;
                 Vector3 _position = spawnPoint_Projectile.position;
 
                 //instantiate
@@ -102,21 +113,23 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void OnCollisionEnter(Collision collision)
+    public void OnTriggerEnter(Collider collider)
     {
-        GameObject enemy = collision.gameObject;
+        GameObject enemy = collider.gameObject;
         if (enemy.tag.Equals("Enemy"))
         {
             if (Time.time - _timestamp_hurt >= duration_invinc)
             {
                 Debug.Log("player hurt");
                 hitCount--;
-                _gameController.removeLife();
+                if (_gameController != null)
+                    _gameController.removeLife();
 
                 _timestamp_hurt = Time.time;
             }
         }
         if (hitCount <= 0)
-            _gameController.Defeated();
+            if (_gameController != null)
+                _gameController.Defeated();
     }
 }
