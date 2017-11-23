@@ -23,6 +23,12 @@ public class PlayerController : MonoBehaviour {
     private float _timestamp_Attack;
     private float _timestamp_hurt;
     private AudioSource _shotSound;
+    private Animator spriteAnimator;
+
+    private Vector3 motion_Flat;
+    private Vector3 directional_facing;
+    private float speed;
+
 
     void Start() {
         _characterController = GetComponent<CharacterController>();
@@ -32,6 +38,7 @@ public class PlayerController : MonoBehaviour {
         _gameController = GameController.s_Instance;
         if (_gameController == null)
             Debug.Log("GameController was not instantiated");
+        spriteAnimator = GetComponent<Animator>();
     }
 
 	void Update () {
@@ -41,39 +48,41 @@ public class PlayerController : MonoBehaviour {
 
     void ControlMouse()
     {
+        //set facing
         Ray ray = _camera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Physics.Raycast(ray, out hit, 50, cursorTargets.value);
-        _targetRotation = Quaternion.LookRotation(new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(Aimable.transform.position.x,0, Aimable.transform.position.z));
+        //Vector3
+        directional_facing = Vector3.Normalize(new Vector3(hit.point.x, 0, hit.point.z) - new Vector3(Aimable.transform.position.x, 0, Aimable.transform.position.z));
+        _targetRotation = Quaternion.LookRotation(directional_facing);
         Aimable.transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(Aimable.transform.eulerAngles.y, _targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
 
+        //set motion
         Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        //if (input != Vector3.zero)
-        //{
-        //    _targetRotation = Quaternion.LookRotation(input);
-        //    transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y, _targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
-        //}
         Vector3 motion = input;
         motion *= Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1 ? 0.70710678118654752440084436210485f : 1.0f;
         motion *= Input.GetButton("Run") ? runSpeed : walkSpeed;
+        //Vector3
+        motion_Flat = motion;
         motion += Vector3.up * -8;
         _characterController.Move(motion * Time.deltaTime);
-    }
 
-    // INTEGRATED INTO CONTROL_MOUSE() : this should probably be removed
-    void ControlWASD()
-    {
-        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-        if (input != Vector3.zero)
+        //set sprite state
+        //float
+            speed = motion_Flat.magnitude;
+        bool forwards = Vector3.Dot(directional_facing, motion_Flat) >= 0;
+        if (speed < 0.1f)
         {
-            _targetRotation = Quaternion.LookRotation(input);
-            transform.eulerAngles = Vector3.up * Mathf.MoveTowardsAngle(transform.eulerAngles.y, _targetRotation.eulerAngles.y, rotationSpeed * Time.deltaTime);
+            spriteAnimator.SetBool("Idle", true);
+            spriteAnimator.SetFloat("Speed", 1.0f);
         }
-        Vector3 motion = input;
-        motion *= Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1 ? 0.70710678118654752440084436210485f : 1.0f;
-        motion *= Input.GetButton("Run") ? runSpeed : walkSpeed;
-        motion += Vector3.up * -8;
-        _characterController.Move(motion * Time.deltaTime);
+        else
+        {
+            spriteAnimator.SetBool("Idle", false);
+            spriteAnimator.SetFloat("Speed", forwards ? speed : -speed);
+        }
+        spriteAnimator.SetBool("Looking_Left", directional_facing.x < 0);
+        spriteAnimator.SetBool("Looking_Forward", directional_facing.z > 0);
     }
 
     void HandleAttack()
@@ -113,12 +122,14 @@ public class PlayerController : MonoBehaviour {
             {
                 Debug.Log("player hurt");
                 hitCount--;
-                _gameController.removeLife();
+                if (_gameController != null)
+                    _gameController.removeLife();
 
                 _timestamp_hurt = Time.time;
             }
         }
         if (hitCount <= 0)
-            _gameController.Defeated();
+            if (_gameController != null)
+                _gameController.Defeated();
     }
 }
