@@ -39,17 +39,17 @@ public class FadeAway : MonoBehaviour, ITriggerable{
 
     }
 
-    public void onActivate(GameObject culprit)
+    public void onActivate<T>(GameObject culprit, T metaData)
     {
         active = false;
     }
 
-    public void onActive(GameObject culprit)
+    public void onActive<T>(GameObject culprit, T metaData)
     {
         throw new NotImplementedException();
     }
 
-    public void onDeactivate(GameObject culprit)
+    public void onDeactivate<T>(GameObject culprit, T metaData)
     {
         active = true;
     }

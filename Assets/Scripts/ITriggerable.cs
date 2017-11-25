@@ -16,14 +16,19 @@ public struct TriggerSet
 
 public interface ITriggerable
 {
-    void onActivate(GameObject culprit);
-    void onActive(GameObject culprit);
-    void onDeactivate(GameObject culprit);
+    void onActivate<T>(GameObject culprit, T metaData);
+    void onActive<T>(GameObject culprit, T metaData);
+    void onDeactivate<T>(GameObject culprit, T metaData);
 }
 
 public class StaticCaller_Trigger
 {
     internal static void applyTrigger(TriggerSet ts, GameObject culprit)
+    {
+        applyTrigger(ts, culprit, (int)0);
+    }
+
+    internal static void applyTrigger<T>(TriggerSet ts, GameObject culprit, T metaData)
     {
         ITriggerable triggerable = getTriggerable(ts);
 
@@ -31,10 +36,10 @@ public class StaticCaller_Trigger
         switch (ts.action)
         {
             case TriggerAction.ACTIVATE:
-                triggerable.onActivate(culprit);
+                triggerable.onActivate(culprit, metaData);
                 break;
             case TriggerAction.DEACTIVATE:
-                triggerable.onDeactivate(culprit);
+                triggerable.onDeactivate(culprit, metaData);
                 break;
         }
     }
