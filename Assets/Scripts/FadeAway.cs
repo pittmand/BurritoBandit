@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FadeAway : MonoBehaviour, ITrigger{
+public class FadeAway : MonoBehaviour, ITriggerable{
 
     public bool active = true;
     public float fullAlpha = 1.0f;

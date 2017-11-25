@@ -14,7 +14,7 @@ public struct TriggerSet
     public TriggerAction action;
 }
 
-public interface ITrigger
+public interface ITriggerable
 {
     void onActivate(GameObject culprit);
     void onActive(GameObject culprit);
@@ -25,7 +25,7 @@ public class StaticCaller_Trigger
 {
     internal static void applyTrigger(TriggerSet ts, GameObject culprit)
     {
-        ITrigger triggerable = getTriggerable(ts);
+        ITriggerable triggerable = getTriggerable(ts);
 
         Debug.Log("Trigger Call "+ triggerable.ToString()+ " " + ts.action.ToString() + " " + culprit.ToString() );
         switch (ts.action)
@@ -39,10 +39,10 @@ public class StaticCaller_Trigger
         }
     }
 
-    private static ITrigger getTriggerable(TriggerSet ts)
+    private static ITriggerable getTriggerable(TriggerSet ts)
     {
         GameObject g = ts.triggerable;
-        ITrigger triggerable = g.GetComponent<ITrigger>();
+        ITriggerable triggerable = g.GetComponent<ITriggerable>();
         if (triggerable != null)
             return triggerable;
 
@@ -52,7 +52,7 @@ public class StaticCaller_Trigger
     internal static bool isTriggerable(TriggerSet ts)
     {
         GameObject g = ts.triggerable;
-        ITrigger triggerable = g.GetComponent<ITrigger>();
+        ITriggerable triggerable = g.GetComponent<ITriggerable>();
 
         return triggerable != null;
     }
