@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Trigger_Zone : MonoBehaviour {
 
-    public List<GameObject> EventTargets_onEnterOnce;
-    public List<GameObject> EventTargets_onEnter;
-    public List<GameObject> EventTargets_onResiding;
-    public List<GameObject> EventTargets_onExitOnce;
-    public List<GameObject> EventTargets_onExit;
+    public List<TriggerSet> EventTargets_onEnterOnce;
+    public List<TriggerSet> EventTargets_onEnter;
+    public List<TriggerSet> EventTargets_onResiding;
+    public List<TriggerSet> EventTargets_onExitOnce;
+    public List<TriggerSet> EventTargets_onExit;
 
-    public List<string> triggerables_tags;
+    public List<string> culprits_tags;
 
 
     // Use this for initialization
@@ -18,35 +18,35 @@ public class Trigger_Zone : MonoBehaviour {
         // remove invalids
         for (int i=0; i< EventTargets_onEnterOnce.Count;)
         {
-            if (getTrigger(EventTargets_onEnterOnce[i]) == null)
+            if (!StaticCaller_Trigger.isTriggerable(EventTargets_onEnterOnce[i]))
                 EventTargets_onEnterOnce.RemoveAt(i);
             else
                 ++i;
         }
         for (int i = 0; i < EventTargets_onEnter.Count;)
         {
-            if (getTrigger(EventTargets_onEnter[i]) == null)
+            if (!StaticCaller_Trigger.isTriggerable(EventTargets_onEnter[i]))
                 EventTargets_onEnter.RemoveAt(i);
             else
                 ++i;
         }
         for (int i = 0; i < EventTargets_onResiding.Count;)
         {
-            if (getTrigger(EventTargets_onResiding[i]) == null)
+            if (!StaticCaller_Trigger.isTriggerable(EventTargets_onResiding[i]))
                 EventTargets_onResiding.RemoveAt(i);
             else
                 ++i;
         }
         for (int i = 0; i < EventTargets_onExitOnce.Count;)
         {
-            if (getTrigger(EventTargets_onExitOnce[i]) == null)
+            if (!StaticCaller_Trigger.isTriggerable(EventTargets_onExitOnce[i]))
                 EventTargets_onExitOnce.RemoveAt(i);
             else
                 ++i;
         }
         for (int i = 0; i < EventTargets_onExit.Count;)
         {
-            if (getTrigger(EventTargets_onExit[i]) == null)
+            if (!StaticCaller_Trigger.isTriggerable(EventTargets_onExit[i]))
                 EventTargets_onExit.RemoveAt(i);
             else
                 ++i;
@@ -64,18 +64,12 @@ public class Trigger_Zone : MonoBehaviour {
 
         if (validCulprit(culprit))
         {
-            foreach (GameObject g in EventTargets_onEnterOnce)
-            {
-                ITrigger trigger = getTrigger(g);
-                trigger.onActivate(culprit);
-            }
+            foreach (TriggerSet ts in EventTargets_onEnterOnce)
+                StaticCaller_Trigger.applyTrigger(ts, culprit);
             EventTargets_onEnterOnce.Clear();
 
-            foreach (GameObject g in EventTargets_onEnter)
-            {
-                ITrigger trigger = getTrigger(g);
-                trigger.onActivate(culprit);
-            }
+            foreach (TriggerSet ts in EventTargets_onEnter)
+                StaticCaller_Trigger.applyTrigger(ts, culprit);
         }
     }
 
@@ -85,11 +79,8 @@ public class Trigger_Zone : MonoBehaviour {
 
         if (validCulprit(culprit))
         {
-            foreach (GameObject g in EventTargets_onResiding)
-            {
-                ITrigger trigger = getTrigger(g);
-                trigger.onActive(culprit);
-            }
+            foreach (TriggerSet ts in EventTargets_onResiding)
+                StaticCaller_Trigger.applyTrigger(ts, culprit);
         }
     }
 
@@ -99,37 +90,18 @@ public class Trigger_Zone : MonoBehaviour {
 
         if (validCulprit(culprit))
         {
-            foreach (GameObject g in EventTargets_onExitOnce)
-            {
-                ITrigger trigger = getTrigger(g);
-                trigger.onDeactivate(culprit);
-            }
+            foreach (TriggerSet ts in EventTargets_onExitOnce)
+                StaticCaller_Trigger.applyTrigger(ts, culprit);
             EventTargets_onExitOnce.Clear();
 
-            foreach (GameObject g in EventTargets_onExit)
-            {
-                ITrigger trigger = getTrigger(g);
-                trigger.onDeactivate(culprit);
-            }
+            foreach (TriggerSet ts in EventTargets_onExit)
+                StaticCaller_Trigger.applyTrigger(ts, culprit);
         }
-    }
-
-    private ITrigger getTrigger(GameObject g)
-    {
-        ITrigger trigger = g.GetComponent<ITrigger>();
-        if (trigger != null)
-            return trigger;
-
-        trigger = g.GetComponentInChildren<ITrigger>();
-        if (trigger != null)
-            return trigger;
-
-        return null;
     }
 
     private bool validCulprit(GameObject culprit)
     {
-        foreach (string s in triggerables_tags)
+        foreach (string s in culprits_tags)
         {
             if (culprit.CompareTag(s))
             {
