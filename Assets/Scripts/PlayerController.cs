@@ -22,7 +22,9 @@ public class PlayerController : MonoBehaviour {
     private Camera _camera;
     private float _timestamp_Attack;
     private float _timestamp_hurt;
+    private AudioSource[] soundHandler;
     private AudioSource _shotSound;
+    private AudioSource _deadSound;
     private Animator spriteAnimator;
 
     private Vector3 motion_Flat;
@@ -34,7 +36,9 @@ public class PlayerController : MonoBehaviour {
         _characterController = GetComponent<CharacterController>();
         _camera = Camera.main;
         _timestamp_hurt = _timestamp_Attack = Time.time;
-        _shotSound = GetComponent<AudioSource>();
+         soundHandler = GetComponents<AudioSource>();
+        _shotSound = soundHandler[0];
+        _deadSound = soundHandler[1];
         _gameController = GameController.s_Instance;
         if (_gameController == null)
             Debug.Log("GameController was not instantiated");
@@ -126,10 +130,14 @@ public class PlayerController : MonoBehaviour {
                     _gameController.removeLife();
 
                 _timestamp_hurt = Time.time;
+                _deadSound.Play();
             }
+
         }
         if (hitCount <= 0)
             if (_gameController != null)
-                _gameController.Defeated();
+            {
+               _gameController.Defeated();
+            }
     }
 }

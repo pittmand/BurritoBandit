@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class EnemyHealthManager : MonoBehaviour {
     public int MaxHealth = 50;
     public int CurrentHealth;
@@ -9,13 +10,16 @@ public class EnemyHealthManager : MonoBehaviour {
     public int scoreValue = 1;
     public GameController gameController;
     public GameObject prefab_Explosion;
+   
 
     void Start ()
     {
+        
         CurrentHealth = MaxHealth;
         gameController = GameController.s_Instance;
         if (gameController == null)
             Debug.Log("GameController was not instantiated");
+
     }
 	
 	// Update is called once per frame
@@ -32,5 +36,7 @@ public class EnemyHealthManager : MonoBehaviour {
     public void HurtEnemy(int damageTaken)
     {
         CurrentHealth -= damageTaken;
+        AudioSource splat = GetComponent<AudioSource>();
+        splat.Play();
     }
 }
