@@ -5,6 +5,15 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
 
+[System.Serializable]
+public enum SpeakerIconID
+{
+    PLAYER,
+    BURRITO,
+    GUACAMOLE,
+    BEANS
+}
+
 public class GameController : MonoBehaviour {
 
     public static GameController s_Instance;
@@ -24,12 +33,20 @@ public class GameController : MonoBehaviour {
     bool paused;
     float timestamp_PowerUP;
     float timestamp_AutoSave;
+    float timestamp_dialog;
+    float dialog_minDuration;
+    float dialog_maxDuration;
 
     //objects
     public GameObject mainMenu;
     public GameObject settingsMenu;
     public GameObject inGameMenu;
     public GameObject HUD;
+    public GameObject dialogBox;
+    public Text dialog;
+    public Image dialogIcon;
+    public List<GameObject> tutorials;
+    public List<Sprite> speakerIcons;
     RectTransform lifeBar;
     Text score_displayed;
 
@@ -51,6 +68,8 @@ public class GameController : MonoBehaviour {
 
     //files
     SaveData saveData;
+
+
 
 
     /// UNITY EVENTS ///
@@ -115,6 +134,21 @@ public class GameController : MonoBehaviour {
                     if (power_up && duration_PowerUP < Time.time - timestamp_PowerUP)
                     {
                         power_up = false;
+                    }
+                }
+
+                //is dialog active
+                if (dialogBox.activeSelf)
+                {
+                    //check dialog experation
+                    float dialog_elasped = Time.time - timestamp_dialog;
+                    if (dialog_elasped > dialog_maxDuration)
+                    {
+                        dialogBox.SetActive(false);
+                    }
+                    else if (dialog_elasped > dialog_minDuration)
+                    {
+                        // enable exiting dialog
                     }
                 }
             }
@@ -197,6 +231,13 @@ public class GameController : MonoBehaviour {
         //close hud
         HUD.SetActive(false);
 
+        //close any tutorials (if open)
+        foreach(GameObject tutorial in tutorials)
+            tutorial.SetActive(false);
+
+        //close dialog (if open)
+        dialogBox.SetActive(false);
+
         //save game
         SaveData();
 
@@ -234,6 +275,13 @@ public class GameController : MonoBehaviour {
     {
         //close hud (if active)
         HUD.SetActive(false);
+
+        //close any tutorials (if open)
+        foreach (GameObject tutorial in tutorials)
+            tutorial.SetActive(false);
+
+        //close dialog (if open)
+        dialogBox.SetActive(false);
 
         //exit level
         SceneManager.LoadScene("MainMenu");
@@ -336,6 +384,37 @@ public class GameController : MonoBehaviour {
         power_up = true;
         timestamp_PowerUP = Time.time;
     }
+
+
+
+
+    ///  TUTORIALS  ///
+    
+    internal void openTutorial(int index, bool open)
+    {
+        if(index >=0 && index < tutorials.Count && tutorials[index] != null)
+            tutorials[index].SetActive(open);
+    }
+
+
+
+
+    ///  DIALOG  ///
+      
+    internal void openDialog(SpeakerIconID iconID, string message, float minDuration, float maxDuration)
+    {
+        if ((int)iconID < speakerIcons.Count && speakerIcons[(int)iconID] != null)
+        {
+            timestamp_dialog = Time.time;
+            dialog_minDuration = minDuration;
+            dialog_maxDuration = maxDuration;
+
+            dialogIcon.sprite = speakerIcons[(int)iconID];
+            dialog.text = message;
+            dialogBox.SetActive(true);
+        }
+    }
+
 
 
 
