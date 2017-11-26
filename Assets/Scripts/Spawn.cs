@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
+
 public class Spawn : MonoBehaviour
 {
     public int max_active = 10;
@@ -113,7 +115,9 @@ public class Spawn : MonoBehaviour
             }
 
             GameObject enemy = Instantiate(prefab_enemies[UnityEngine.Random.Range(0, prefab_enemies.Length - 1)], spawnPoint, Quaternion.identity);
-            enemies.Add(enemy);
+            NavMeshAgent agent = enemy.GetComponent<NavMeshAgent>();
+            if (agent != null)
+                agent.Warp(spawnPoint);
             enemy.AddComponent<Spawnling>().spawner = this;
             ++count;
 
