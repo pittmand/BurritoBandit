@@ -1,30 +1,37 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trigger_Dialog : MonoBehaviour {
+public class Trigger_Dialog : MonoBehaviour, ITriggerable
+{
 
     GameController _gameController;
+    public DialogMessage message;
 
-        
     void Start ()
     {
         _gameController = GameController.s_Instance;
     }
-	
-	
-	void Update () {
-		
-	}
 
-    void OnTriggerEnter(Collider collider)
+    public void onActivate<T>(GameObject culprit, T metaData)
     {
-        GameObject culprit = collider.gameObject;
-        if (culprit.CompareTag("Player"))
+        if (_gameController != null)
         {
-            Debug.Log("OnTriggerEnter D");
-            if (_gameController != null)
-                _gameController.openDialog(SpeakerIconID.PLAYER, "Testing 1 2 3!", 1, 3);
+            _gameController.openDialog(message);
+        }
+    }
+
+    public void onActive<T>(GameObject culprit, T metaData)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void onDeactivate<T>(GameObject culprit, T metaData)
+    {
+        if (_gameController != null)
+        {
+            _gameController.closeDialog();
         }
     }
 }

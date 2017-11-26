@@ -12,6 +12,22 @@ public enum SpeakerIconID
     BURRITO,
     GUACAMOLE,
     BEANS
+};
+
+[System.Serializable]
+public struct DialogMessage
+{
+    public SpeakerIconID iconID;
+    public string message;
+    public float minDuration;
+    public float maxDuration;
+};
+
+[System.Serializable]
+public struct TutorialMessage
+{
+    public int index;
+    public bool open;
 }
 
 public class GameController : MonoBehaviour {
@@ -390,10 +406,10 @@ public class GameController : MonoBehaviour {
 
     ///  TUTORIALS  ///
     
-    internal void openTutorial(int index, bool open)
+    internal void openTutorial(TutorialMessage message)
     {
-        if(index >=0 && index < tutorials.Count && tutorials[index] != null)
-            tutorials[index].SetActive(open);
+        if(message.index >=0 && message.index < tutorials.Count && tutorials[message.index] != null)
+            tutorials[message.index].SetActive(message.open);
     }
 
 
@@ -401,18 +417,23 @@ public class GameController : MonoBehaviour {
 
     ///  DIALOG  ///
       
-    internal void openDialog(SpeakerIconID iconID, string message, float minDuration, float maxDuration)
+    internal void openDialog(DialogMessage message)
     {
-        if ((int)iconID < speakerIcons.Count && speakerIcons[(int)iconID] != null)
+        if ((int)message.iconID < speakerIcons.Count && speakerIcons[(int)message.iconID] != null)
         {
             timestamp_dialog = Time.time;
-            dialog_minDuration = minDuration;
-            dialog_maxDuration = maxDuration;
+            dialog_minDuration = message.minDuration;
+            dialog_maxDuration = message.maxDuration;
 
-            dialogIcon.sprite = speakerIcons[(int)iconID];
-            dialog.text = message;
+            dialogIcon.sprite = speakerIcons[(int)message.iconID];
+            dialog.text = message.message;
             dialogBox.SetActive(true);
         }
+    }
+
+    internal void closeDialog()
+    {
+        dialogBox.SetActive(false);
     }
 
 
