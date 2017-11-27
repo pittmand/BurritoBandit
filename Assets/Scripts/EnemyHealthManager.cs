@@ -32,5 +32,7 @@ public class EnemyHealthManager : MonoBehaviour {
     public void HurtEnemy(int damageTaken)
     {
         CurrentHealth -= damageTaken;
+        AudioSource splat = GetComponent<AudioSource>();
+        splat.Play();
     }
 }
