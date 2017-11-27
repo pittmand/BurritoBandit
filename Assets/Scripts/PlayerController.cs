@@ -81,8 +81,8 @@ public class PlayerController : MonoBehaviour {
             spriteAnimator.SetBool("Idle", false);
             spriteAnimator.SetFloat("Speed", forwards ? speed : -speed);
         }
-        spriteAnimator.SetBool("Looking_Left", directional_facing.x < 0);
-        spriteAnimator.SetBool("Looking_Forward", directional_facing.z > 0);
+        spriteAnimator.SetFloat("Look_Left", -directional_facing.x);
+        spriteAnimator.SetFloat("Look_Forward", directional_facing.z);
     }
 
     void HandleAttack()
