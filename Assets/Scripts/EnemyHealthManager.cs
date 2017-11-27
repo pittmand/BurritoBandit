@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class EnemyHealthManager : MonoBehaviour {
     public int MaxHealth = 50;
     public int CurrentHealth;
@@ -32,5 +33,7 @@ public class EnemyHealthManager : MonoBehaviour {
     public void HurtEnemy(int damageTaken)
     {
         CurrentHealth -= damageTaken;
+        AudioSource splat = GetComponent<AudioSource>();
+        splat.Play();
     }
 }
