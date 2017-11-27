@@ -13,6 +13,7 @@ public class Spawn : MonoBehaviour
     public Bounds bounds;
     public GameObject[] prefab_enemies;
     internal System.Collections.Generic.List<GameObject> enemies;
+    private LevelController _levelController;
     private Vector3 spawnPoint;
     private bool invoked = false;
     private int count = 0;
@@ -20,6 +21,7 @@ public class Spawn : MonoBehaviour
     void Start()
     {
         enemies = new System.Collections.Generic.List<GameObject>();
+        _levelController = LevelController.s_Instance;
     }
 
     void Update()
@@ -76,7 +78,7 @@ public class Spawn : MonoBehaviour
                 CancelInvoke();
                 invoked = false;
             }
-            else
+            else if (count < max_spawned)
             {
                 Vector3 pos_player = player.transform.position;
 
@@ -129,6 +131,11 @@ public class Spawn : MonoBehaviour
                 ++count;
 
                 enemies.Add(enemy);
+
+                if (count >= max_spawned)
+                {
+                    // stop inkove
+                }
             }
         }
     }
@@ -136,5 +143,7 @@ public class Spawn : MonoBehaviour
     internal void ChildDestoryed(GameObject child)
     {
         enemies.Remove(child);
+        if (count == max_spawned && enemies.Count <= 0)
+            _levelController.objective_complete(gameObject);
     }
 }
