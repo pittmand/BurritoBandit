@@ -7,13 +7,13 @@ public class MoveEnemy : MonoBehaviour {
 
 
     public Transform player;
+    public float moveSpeed;
     private NavMeshAgent navAgent;
-    private float moveSpeed;
     private Animator spriteAnimator;
 
 	void Start () {
         player = GameObject.FindWithTag("Player").transform;
-        moveSpeed = Random.Range(5f, 8f);
+        moveSpeed *= Random.Range(0.8f, 1.0f);
         spriteAnimator = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
         navAgent.angularSpeed = 0.0f;//freeze rotation
