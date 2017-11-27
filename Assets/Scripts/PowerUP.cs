@@ -5,7 +5,7 @@ using UnityEngine;
 public class PowerUP : MonoBehaviour {
 
     private float timestamp_Spawn;
-    internal float lifespan = 20;
+    public float lifespan = 20;
     
     void Start () {
         //set timestamp to record age

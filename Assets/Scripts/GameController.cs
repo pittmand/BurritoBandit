@@ -32,7 +32,7 @@ public struct TutorialMessage
 
 public class GameController : MonoBehaviour {
 
-    public static GameController s_Instance;
+    internal static GameController s_Instance;
 
     //states
     enum State
@@ -268,7 +268,7 @@ public class GameController : MonoBehaviour {
     }
 
     //called when player is defeated
-    public void Defeated()
+    internal void Defeated()
     {
         //freeze ingame time (if active)
         Time.timeScale = 0.0f;
@@ -284,6 +284,24 @@ public class GameController : MonoBehaviour {
 
         //set game state
         currentState = State.LoseScence;
+    }
+
+    internal void Victory()
+    {
+        //freeze ingame time (if active)
+        Time.timeScale = 0.0f;
+
+        //close in game menu (if open)
+        inGameMenu.SetActive(false);
+
+        //save game
+        SaveData();
+
+        //load fail scene as overlay
+        SceneManager.LoadScene("YouWin", LoadSceneMode.Additive);
+
+        //set game state
+        currentState = State.WinScene;
     }
 
     //called when player exits the win/lose cutscene
