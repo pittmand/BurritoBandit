@@ -1,0 +1,164 @@
+Initialize engine version: 5.6.4p3 (11e8f66cfca7)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1070 (ID=0x1b81)
+    Vendor:   NVIDIA
+    VRAM:     3072 MB
+    Driver:   22.21.13.8494
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\UnityEngine.Analytics.dll (this message is harmless)
+Loading C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\UnityEngine.Analytics.dll into Unity Child Domain
+- Completed reload, in  0.018 seconds
+Platform assembly: C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\nalov\Documents\School\GSP 361\repo\BurritoBandit\BurritoBandit_Beta_Data\Managed\System.dll (this message is harmless)
+desktop: 3840x2160 60Hz; virtual: 3840x2160 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 2.351774 ms
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Setting up 4 worker threads for Enlighten.
+  Thread -> id: 4628 -> priority: 1 
+  Thread -> id: 30bc -> priority: 1 
+  Thread -> id: 3b80 -> priority: 1 
+  Thread -> id: 3764 -> priority: 1 
+UnloadTime: 0.247586 ms
+
+Unloading 5 unused Assets to reduce memory usage. Loaded Objects now: 1087.
+Total: 0.617164 ms (FindLiveObjects: 0.066704 ms CreateObjectMapping: 0.029746 ms MarkObjects: 0.511399 ms  DeleteObjects: 0.008713 ms)
+
+Auto-Save
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Save
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.294760 ms
+Default clip could not be found in attached animations list.
+ 
+(Filename:  Line: 395)
+
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1634.
+Total: 0.933258 ms (FindLiveObjects: 0.061596 ms CreateObjectMapping: 0.039962 ms MarkObjects: 0.592525 ms  DeleteObjects: 0.238873 ms)
+
+Trigger Call Event_Dialog Burrito (Trigger_Dialog) ACTIVATE Enemy_Burrito(Clone) (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Save
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 2 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.177464 ms
+
+Unloading 178 unused Assets to reduce memory usage. Loaded Objects now: 1115.
+Total: 4.299117 ms (FindLiveObjects: 0.043868 ms CreateObjectMapping: 0.038760 ms MarkObjects: 0.506291 ms  DeleteObjects: 3.709896 ms)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.213032 ms
+Default clip could not be found in attached animations list.
+ 
+(Filename:  Line: 395)
+
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 1636.
+Total: 0.846122 ms (FindLiveObjects: 0.060995 ms CreateObjectMapping: 0.035154 ms MarkObjects: 0.521014 ms  DeleteObjects: 0.213032 ms)
+
+Trigger Call Event_Dialog Burrito (Trigger_Dialog) ACTIVATE Enemy_Burrito(Clone) (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call FadeAway_Ceiling (FadeAway) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call FadeAway_Ceiling (FadeAway) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call Event_Dialog Chilli Pepper (Trigger_Dialog) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call FadeAway_Ceiling (FadeAway) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call Event_Dialog kitchen (Trigger_Dialog) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call FadeAway_Ceiling (FadeAway) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call FadeAway_Ceiling (FadeAway) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call FadeAway_Ceiling (FadeAway) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Objective Complete Called Spawner (1) (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call FadeAway_Ceiling (FadeAway) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call Event_Dialog Porch (Trigger_Dialog) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Auto-Save
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Save
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call Event_Dialog Shed (Trigger_Dialog) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Trigger Call FadeAway_Ceiling (FadeAway) ACTIVATE Player (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Objective Complete Called Spawner (2) (UnityEngine.GameObject)
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Save
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 8.776113 ms
+
+Unloading 208 unused Assets to reduce memory usage. Loaded Objects now: 1115.
+Total: 4.074065 ms (FindLiveObjects: 0.058291 ms CreateObjectMapping: 0.049276 ms MarkObjects: 0.526122 ms  DeleteObjects: 3.440075 ms)
+
+Save
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
