@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1d91d1f16954e594ba86fa0210b4a51b
-timeCreated: 1511059457
+timeCreated: 1512265886
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -90,7 +90,7 @@ TextureImporter:
       name: ChiliPepperSheet_1
       rect:
         serializedVersion: 2
-        x: 64
+        x: 65
         y: 0
         width: 64
         height: 64
@@ -103,7 +103,7 @@ TextureImporter:
       name: ChiliPepperSheet_2
       rect:
         serializedVersion: 2
-        x: 128
+        x: 129
         y: 0
         width: 64
         height: 64
