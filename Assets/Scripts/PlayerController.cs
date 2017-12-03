@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour {
     public int duration_invinc = 2;
     public LayerMask cursorTargets;
     public Transform Aimable;
+    public GameObject HotSauceBottle;
+    public Sprite[] BottleSprites;
 
     private GameController _gameController;
     private CharacterController _characterController;
@@ -109,11 +111,27 @@ public class PlayerController : MonoBehaviour {
 
                 //power up damage
                 if (_gameController != null && _gameController.Power_Up)
+                {
                     _projectile_Scr.power = 25;
+                }
+
+                UpdateHotSauceBottle(_gameController.Power_Up);
 
                 //play shotting clip
                 _shotSound.Play();
             }
+        }
+    }
+
+    void UpdateHotSauceBottle(bool PowerUp)
+    {
+        if (PowerUp)
+        {
+            HotSauceBottle.GetComponent<SpriteRenderer>().sprite = BottleSprites[1];
+        }
+        else
+        {
+            HotSauceBottle.GetComponent<SpriteRenderer>().sprite = BottleSprites[0];
         }
     }
 
