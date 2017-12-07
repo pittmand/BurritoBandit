@@ -52,7 +52,7 @@ public class DoorOpen : MonoBehaviour
 
             if (isPlayer || other.CompareTag("Enemy"))
             {
-                Debug.Log("open");
+                Debug.Log("open"+gameObject);
                 openedOnce = doorOpen = true;
                 _animator.SetBool("Mirrored", Vector3.Dot((other.transform.position - transform.position), transform.forward) > 0);
                 Doors("Open");
@@ -70,7 +70,7 @@ public class DoorOpen : MonoBehaviour
 
         if (doorOpen && tracker.count() <= 0)
         {
-            Debug.Log("close");
+            Debug.Log("close"+gameObject);
             doorOpen = false;
             Doors("Close");
         }
