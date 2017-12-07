@@ -417,6 +417,7 @@ public class GameController : MonoBehaviour {
     {
         power_up = true;
         timestamp_PowerUP = Time.time;
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateHotSauceBottle(power_up);
     }
 
 

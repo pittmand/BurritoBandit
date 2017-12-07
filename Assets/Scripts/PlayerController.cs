@@ -28,10 +28,10 @@ public class PlayerController : MonoBehaviour {
     private AudioSource _shotSound;
     private AudioSource _deadSound;
     private Animator spriteAnimator;
+    private Animator spriteAnimator_weapon;
 
     private Vector3 motion_Flat;
     private Vector3 directional_facing;
-    private float speed;
 
 
     void Start() {
@@ -45,6 +45,10 @@ public class PlayerController : MonoBehaviour {
         if (_gameController == null)
             Debug.Log("GameController was not instantiated");
         spriteAnimator = GetComponent<Animator>();
+        spriteAnimator_weapon = transform.Find("Hand/Weapon").GetComponent<Animator>();
+        // set starting weapon sprite
+        if (_gameController != null)
+            UpdateHotSauceBottle(_gameController.Power_Up);
     }
 
 	void Update () {
@@ -74,8 +78,7 @@ public class PlayerController : MonoBehaviour {
         _characterController.Move(motion * Time.deltaTime);
 
         //set sprite state
-        //float
-            speed = motion_Flat.magnitude;
+        float speed = motion_Flat.magnitude;
         bool forwards = Vector3.Dot(directional_facing, motion_Flat) >= 0;
         if (speed < 0.1f)
         {
@@ -111,11 +114,7 @@ public class PlayerController : MonoBehaviour {
 
                 //power up damage
                 if (_gameController != null && _gameController.Power_Up)
-                {
-                    _projectile_Scr.power = 25;
-                }
-
-                UpdateHotSauceBottle(_gameController.Power_Up);
+                        _projectile_Scr.power = 25;
 
                 //play shotting clip
                 _shotSound.Play();
@@ -123,16 +122,12 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    void UpdateHotSauceBottle(bool PowerUp)
+    internal void UpdateHotSauceBottle(bool PowerUp)
     {
         if (PowerUp)
-        {
-            HotSauceBottle.GetComponent<SpriteRenderer>().sprite = BottleSprites[1];
-        }
+            spriteAnimator_weapon.SetBool("PowerUp", true);
         else
-        {
-            HotSauceBottle.GetComponent<SpriteRenderer>().sprite = BottleSprites[0];
-        }
+            spriteAnimator_weapon.SetBool("PowerUp", false);
     }
 
     public void OnTriggerEnter(Collider collider)
