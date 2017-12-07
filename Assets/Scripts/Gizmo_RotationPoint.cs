@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Gizmo : MonoBehaviour
+public class Gizmo_RotationPoint : MonoBehaviour
 {
     public float gizmoSize = .75f;
     public Color gizmoColor = Color.yellow;
