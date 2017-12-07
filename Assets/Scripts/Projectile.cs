@@ -37,6 +37,10 @@ public class Projectile : MonoBehaviour {
             collider.gameObject.GetComponent<EnemyHealthManager>().HurtEnemy(power);
             //damage enemy
         }
+        else if (victem.tag.Equals("Wall"))
+        {
+            Destroy(gameObject);
+        }
 
         if (!victem.tag.Equals("Player"))//test if projectile did not hit the player
             Destroy(gameObject);
