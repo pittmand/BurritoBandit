@@ -149,7 +149,7 @@ public class GameController : MonoBehaviour {
                     //check if a power up expired
                     if (power_up && duration_PowerUP < Time.time - timestamp_PowerUP)
                     {
-                        power_up = false;
+                        removePowerUP();
                     }
                 }
 
@@ -210,7 +210,7 @@ public class GameController : MonoBehaviour {
         //set stats
         setLife(starting_life);
         setScore(0);
-        power_up = false;
+        removePowerUP();
 
         //enable hud
         HUD.SetActive(true);
@@ -417,13 +417,24 @@ public class GameController : MonoBehaviour {
     {
         power_up = true;
         timestamp_PowerUP = Time.time;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            player.GetComponent<PlayerController>().UpdateHotSauceBottle(power_up);
+    }
+
+    internal void removePowerUP()
+    {
+        power_up = false;
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if(player != null)
+            player.GetComponent<PlayerController>().UpdateHotSauceBottle(power_up);
     }
 
 
 
 
     ///  TUTORIALS  ///
-    
+
     internal void openTutorial(TutorialMessage message)
     {
         if(message.index >=0 && message.index < tutorials.Count && tutorials[message.index] != null)
