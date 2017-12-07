@@ -210,7 +210,7 @@ public class GameController : MonoBehaviour {
         //set stats
         setLife(starting_life);
         setScore(0);
-        power_up = false;
+        removePowerUP();
 
         //enable hud
         HUD.SetActive(true);
@@ -417,13 +417,17 @@ public class GameController : MonoBehaviour {
     {
         power_up = true;
         timestamp_PowerUP = Time.time;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateHotSauceBottle(power_up);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+            player.GetComponent<PlayerController>().UpdateHotSauceBottle(power_up);
     }
 
     internal void removePowerUP()
     {
         power_up = false;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UpdateHotSauceBottle(power_up);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if(player != null)
+            player.GetComponent<PlayerController>().UpdateHotSauceBottle(power_up);
     }
 
 
