@@ -42,6 +42,10 @@ public class EnemyMovement : MonoBehaviour {
         float y_velocity = velocity.y;
         velocity.y = 0;
         if (velocity.magnitude > maxSpeed)
-            physics.velocity = velocity.normalized * maxSpeed;
+        {
+            velocity = velocity.normalized * maxSpeed;
+            velocity.y = y_velocity;
+            physics.velocity = velocity;
+        }
     }
 }
