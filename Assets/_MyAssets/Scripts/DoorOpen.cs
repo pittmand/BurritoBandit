@@ -56,7 +56,7 @@ public class DoorOpen : MonoBehaviour
                 Debug.Log("open"+gameObject);
                 openedOnce = doorOpen = true;
                 _animator.SetBool("Mirrored", Vector3.Dot((other.transform.position - transform.position), transform.forward) > 0);
-                Doors("Open");
+                _animator.SetBool("isOpen", true);
                 tracker.trackEntity(other.gameObject);
             }
         }
@@ -73,13 +73,8 @@ public class DoorOpen : MonoBehaviour
         {
             Debug.Log("close"+gameObject);
             doorOpen = false;
-            Doors("Close");
+            _animator.SetBool("isOpen", false);
         }
-    }
-
-    void Doors(string direction)
-    {
-        _animator.SetTrigger(direction);
     }
 
     private void OnDrawGizmos()
