@@ -12,6 +12,9 @@ public class Trigger_Zone : MonoBehaviour {
 
     public List<string> culprits_tags;
 
+    public Collider _trigger;
+    public Color gizmoColor = Color.green;
+
 
     // Use this for initialization
     void Start () {
@@ -109,5 +112,15 @@ public class Trigger_Zone : MonoBehaviour {
             }
         }
         return false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = gizmoColor;
+        if (_trigger != null)
+        {
+            Bounds bounds = _trigger.bounds;
+            Gizmos.DrawWireCube(bounds.center, bounds.size);
+        }
     }
 }

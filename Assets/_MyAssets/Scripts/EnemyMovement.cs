@@ -7,7 +7,9 @@ public class EnemyMovement : MonoBehaviour {
 
 
     public Transform player;
-    public float moveSpeed;
+    public float moveSpeed_Low;
+    public float moveSpeed_High;
+    private float moveSpeed;
     private float maxSpeed;
     private Rigidbody physics;
     private NavMeshAgent navAgent;
@@ -15,13 +17,12 @@ public class EnemyMovement : MonoBehaviour {
 
 	void Start () {
         player = GameObject.FindWithTag("Player").transform;
-        moveSpeed *= Random.Range(0.8f, 1.0f);
+        moveSpeed = Random.Range(moveSpeed_Low, moveSpeed_High);
+        maxSpeed = moveSpeed * 1.5f;
         physics = GetComponent<Rigidbody>();
         spriteAnimator = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
         navAgent.angularSpeed = 0.0f;//freeze rotation
-        maxSpeed = moveSpeed * 1.5f;
-
     }
 
     void Update () {
@@ -41,6 +42,10 @@ public class EnemyMovement : MonoBehaviour {
         float y_velocity = velocity.y;
         velocity.y = 0;
         if (velocity.magnitude > maxSpeed)
-            physics.velocity = velocity.normalized * maxSpeed;
+        {
+            velocity = velocity.normalized * maxSpeed;
+            velocity.y = y_velocity;
+            physics.velocity = velocity;
+        }
     }
 }

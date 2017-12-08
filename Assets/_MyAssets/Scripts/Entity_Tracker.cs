@@ -38,10 +38,25 @@ public class Entity_Tracker {
     internal void unTrackEntity(GameObject target)
     {
         marks.Remove(target);
+        Entity_Tracker_Mark mark = target.GetComponent<Entity_Tracker_Mark>();
+        if (mark != null)
+            mark.untrack(this);
+    }
+
+    internal void OnDestroy()
+    {
+        foreach (GameObject target in marks)
+        {
+            Entity_Tracker_Mark mark = target.GetComponent<Entity_Tracker_Mark>();
+            if (mark != null)
+                mark.untrack(this);
+        }
     }
 
     internal void targetDestoryed(GameObject target)
     {
         marks.Remove(target);
     }
+
+    
 }
