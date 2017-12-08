@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FailureScene : MonoBehaviour {
+public class Scene_EndGame : MonoBehaviour {
 
     public float duration_FadeIn = 3;
     public float duration_ExitDelay = 5;
@@ -15,8 +15,8 @@ public class FailureScene : MonoBehaviour {
         group = gameObject.GetComponent<CanvasGroup>();
     }
 	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
 
         float prog = Time.unscaledTime - timestamp_loaded;
         
@@ -30,5 +30,5 @@ public class FailureScene : MonoBehaviour {
                 flag = false;
             }
         }
-	}
+    }
 }
