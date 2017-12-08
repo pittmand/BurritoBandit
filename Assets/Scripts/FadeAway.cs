@@ -12,11 +12,11 @@ public class FadeAway : MonoBehaviour, ITriggerable{
 
     private float currentState = 1.0f;
     private Renderer renderer;
-
     
     void Start () {
         renderer = gameObject.GetComponent<Renderer>();
-	}
+
+    }
 	
 	
 	void Update () {
@@ -35,6 +35,14 @@ public class FadeAway : MonoBehaviour, ITriggerable{
             Color c = renderer.material.color;
             c.a = currentState;
             renderer.material.color = c;
+
+            if (Mathf.Abs(targetState - currentState) < 0.01f)
+                currentState = targetState;
+            
+            if (currentState >= 1.0f)
+                setOpaque();
+            else
+                setTransparent();
         }
 
     }
@@ -52,5 +60,15 @@ public class FadeAway : MonoBehaviour, ITriggerable{
     public void onDeactivate<T>(GameObject culprit, T metaData)
     {
         active = true;
+    }
+
+    void setOpaque()
+    {
+        gameObject.layer = 0;
+    }
+
+    void setTransparent()
+    {
+        gameObject.layer = 1;
     }
 }
