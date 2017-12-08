@@ -13,14 +13,15 @@ public enum DoorMode
 public class DoorOpen : MonoBehaviour
 {
     public DoorMode mode;
+    public Collider _trigger;
+    public Color gizmoColor = Color.green;
+    
 
     private Animator _animator;
     private NavMeshObstacle _lock;
-
     private Entity_Tracker tracker;
 
     private bool doorOpen;
-
     private bool openedOnce = false;
 
     // Use this for initialization
@@ -79,5 +80,15 @@ public class DoorOpen : MonoBehaviour
     void Doors(string direction)
     {
         _animator.SetTrigger(direction);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = gizmoColor;
+        if (_trigger != null)
+        {
+            Bounds bounds = _trigger.bounds;
+            Gizmos.DrawWireCube(bounds.center, bounds.size);
+        }
     }
 }
