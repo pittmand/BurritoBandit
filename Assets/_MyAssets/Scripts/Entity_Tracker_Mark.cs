@@ -11,4 +11,11 @@ public class Entity_Tracker_Mark : MonoBehaviour {
         foreach (Entity_Tracker tracker in trackers)
             tracker.targetDestoryed(gameObject);
     }
+
+    internal void untrack(Entity_Tracker tracker)
+    {
+        trackers.Remove(tracker);
+        if (trackers.Count == 0)
+            Destroy(this);
+    }
 }
