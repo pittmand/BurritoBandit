@@ -4,39 +4,33 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class EnemyPlaySteps : MonoBehaviour {
-    private AudioSource[] soundHandler;
-    private AudioSource _stepSound;
-    private int starttime;
-    private int newtime;
-    private int curtime;
+    public AudioSource _stepSound;
+    private float starttime;
+    private float newtime;
+    private float curtime;
 
     // Use this for initialization
     void Start () {
-        soundHandler = GetComponents<AudioSource>();
-        _stepSound = soundHandler[1];
-        starttime = (int)Time.time;
-        newtime = starttime + (int)Random.Range(3, 20);
+        curtime = starttime = Time.time;
+        gennewtime();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        curtime = (int)Time.time;
-        if (curtime == newtime)
+        curtime = Time.time;
+        if (curtime >= newtime)
         {
             play();
         }
-
-
 	}
 
     void play()
     {
-         _stepSound.Play();
+        _stepSound.Play();
         gennewtime();
     }
 
     void gennewtime() {
-        newtime = curtime + (int)Random.Range(3, 10);
-
+        newtime = curtime + Random.Range(1, 1.2f);
     }
 }
