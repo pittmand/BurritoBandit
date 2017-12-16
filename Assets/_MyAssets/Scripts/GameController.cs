@@ -43,7 +43,8 @@ public class GameController : MonoBehaviour {
         MainGame,
         CutScence,
         LoseScence,
-        WinScene
+        WinScene,
+        Credits
     };
     State currentState;
     bool paused;
@@ -302,6 +303,27 @@ public class GameController : MonoBehaviour {
 
         //set game state
         currentState = State.WinScene;
+    }
+
+    public void LoadCredits()
+    {
+        //restore ingame time (for animations to work)
+        Time.timeScale = 1.0f;
+
+        //close main menu (if open)
+        mainMenu.SetActive(false);
+
+        //close in game menu (if open)
+        inGameMenu.SetActive(false);
+
+        //close hud (if active)
+        HUD.SetActive(false);
+
+        //load credits
+        SceneManager.LoadScene("Credits");
+
+        //set game state
+        currentState = State.Credits;
     }
 
     //called when player exits the win/lose cutscene
