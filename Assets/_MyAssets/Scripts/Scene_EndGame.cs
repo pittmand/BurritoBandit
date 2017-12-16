@@ -26,7 +26,7 @@ public class Scene_EndGame : MonoBehaviour {
         {
             if(Input.GetButton("Submit") || Input.GetButton("Cancel"))
             {
-                GameController.s_Instance.ReturnToMain();
+                GameController.s_Instance.LoadCredits();
                 flag = false;
             }
         }

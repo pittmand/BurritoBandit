@@ -6,24 +6,24 @@ using UnityEngine.UI;
 
 public class Credit_Scroller : MonoBehaviour {
 
-    public Text PressButtonText;
+    public GameObject continueButton;
+
+    private GameController _gameController;
 
     void Start()
     {
-        PressButtonText.enabled = false;
+        continueButton.SetActive(false);
+        _gameController = GameController.s_Instance;
     }
 
-    void Update()
+    public void enableButton(int state)
     {
-        if (transform.position.y >= 1200.0f)
-        {
-            PressButtonText.enabled = true;
+        continueButton.SetActive(state != 0);
+    }
 
-            //if (Input.GetKey(KeyCode.Space)) //Change KeyCode Here
-            {
-                //Input Command Here
-            }
-        }
+    public void endScene()
+    {
+        _gameController.ReturnToMain();
     }
 }
 
