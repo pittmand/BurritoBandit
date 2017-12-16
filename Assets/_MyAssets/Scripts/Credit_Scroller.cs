@@ -2,31 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Credit_Scroller : MonoBehaviour {
 
-	public GameObject Camera;
-	public int speed = 1;
-	public string level;
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		GetComponent<Camera>().transform.Translate (Vector3.down * Time.deltaTime * speed);
+    public GameObject continueButton;
 
-        StartCoroutine(waitFor());
-	}
+    private GameController _gameController;
 
-
-    IEnumerator waitFor()
+    void Start()
     {
-        yield return new WaitForSeconds(20);
-        //Application.LoadLevel(level);
-        SceneManager.LoadScene("BurritoBandit");
-        
+        continueButton.SetActive(false);
+        _gameController = GameController.s_Instance;
+    }
+
+    public void enableButton(int state)
+    {
+        continueButton.SetActive(state != 0);
+    }
+
+    public void endScene()
+    {
+        _gameController.ReturnToMain();
     }
 }
 
